@@ -11,9 +11,9 @@ export default {
             withCredentials: true
         }).then(callback).catch(fallback);
     },
-    // ancient(id, callback, fallback) {
-    //     axios.get(config.api.ancient + "/ancient/" + id, {
-    //         withCredentials: true
-    //     }).then(callback).catch(fallback);
-    // },
+    getArticle(id, callback, fallback) {
+        axios.get(config.api.tech + "/article/" + id, {
+            withCredentials: true
+        }).then(callback).catch(fallback);
+    },
 };

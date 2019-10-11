@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
 
 Vue.use(Router);
 
@@ -13,8 +12,8 @@ export default new Router({
       component: () => import('./components/Articles.vue'),
     },
     {
-      path: '/markdown',
-      component: () => import('./components/Markdown.vue'),
+      path: '/article/:id',
+      component: () => import('./components/Article.vue'),
     },
   ],
 });

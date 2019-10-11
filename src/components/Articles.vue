@@ -1,21 +1,37 @@
 <template>
   <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-    <v-card flat outlined width="100%" class="py-10 px-12">
+    <v-layout align-center justify-center fill-height text-center row wrap>
       <template v-for="(article, i) in articles">
-        <v-list-item three-line :key="i" :to="'/article/'+article.id">
-          <v-list-item-content>
-            <v-list-item-title class="headline mb-1">{{article.title}}</v-list-item-title>
-            <v-list-item-subtitle>
-              {{article.author}}
-              {{article.id}}
-            </v-list-item-subtitle>
-            <v-list-item-subtitle>{{article.title}}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+        <v-flex md4 :key="i" px-3 my-3 class="article-cards">
+          <v-card class="mx-auto pa-2" height="150" :to="'/article/'+article.id">
+            <h2 class="mt-5">{{article.title}}</h2>
+            <h3 class="my-5 cards-subtitle">{{article.author}}</h3>
+          </v-card>
+        </v-flex>
       </template>
-    </v-card>
+    </v-layout>
   </div>
 </template>
+
+<style>
+.article-cards {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 14px;
+  color: #333333;
+}
+
+.article-cards h2 {
+  font-size: 16px;
+}
+
+.article-cards h3 {
+  font-size: 14px;
+}
+
+.cards-subtitle {
+  color: #aaaaaa;
+}
+</style>
 
 <script>
 export default {

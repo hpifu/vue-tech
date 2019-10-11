@@ -86,7 +86,6 @@ export default {
       }
     });
 
-    console.log(this.$route.params.id);
     api.getArticle(
       this.$route.params.id,
       res => {
@@ -98,8 +97,6 @@ export default {
           this.title = res.data.title;
           this.author = res.data.author;
           this.content = marked(res.data.content);
-          console.log(marked(res.data.content));
-          console.log(res.data.content);
         }
       },
       err => {

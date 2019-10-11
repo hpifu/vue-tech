@@ -1,4 +1,4 @@
-const configs = {
+const configs: any = {
     production: {
         org: 'HPiFu',
         api: {

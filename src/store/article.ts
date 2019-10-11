@@ -1,6 +1,6 @@
 import api from '../api';
 
-const state = {
+const states: any = {
     offset: 0,
     limit: 20,
     articles: [],
@@ -8,19 +8,19 @@ const state = {
 };
 
 const mutations = {
-    setOffset(state, value) {
+    setOffset(state: any, value: number) {
         state.offset = value;
     },
-    setDone(state, value) {
+    setDone(state: any, value: boolean) {
         state.done = value;
     },
-    setArticles(state, value) {
+    setArticles(state: any, value: any[]) {
         state.articles = value;
     },
-    appendArticles(state, as) {
+    appendArticles(state: any, as: any[]) {
         state.articles.push(...as);
     },
-    reset(state) {
+    reset(state: any) {
         state.offset = 0;
         state.done = false;
         state.articles = [];
@@ -28,34 +28,34 @@ const mutations = {
 };
 
 const actions = {
-    loadMore({ commit, state }, callback) {
+    loadMore({ commit, state }: { commit: any, state: any }, callback: any) {
         if (state.Done) {
             return;
         }
         api.getArticles({
             limit: state.limit,
             offset: state.offset,
-        }, (res) => {
-            if (res.status == 204) {
+        }, (res: any) => {
+            if (res.status === 204) {
                 // nothing to do
             }
-            if (res.status == 200) {
+            if (res.status === 200) {
                 commit('appendArticles', res.data);
-                if (res.data.length != state.limit) {
+                if (res.data.length !== state.limit) {
                     commit('setDone', true);
                 }
             }
             commit('setOffset', state.offset + state.limit);
             callback();
-        }, (err) => {
-            console.log(err);
+        }, (err: any) => {
+            // console.log(err);
         });
     },
 };
 
 export default {
     namespaced: true,
-    state,
+    state: states,
     actions,
     mutations,
 };

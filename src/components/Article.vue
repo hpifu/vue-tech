@@ -1,17 +1,60 @@
 <template>
   <v-container>
-    <h2>{{this.title}}</h2>
-    <h3 class="my-5">{{this.author}}</h3>
-    <v-layout text-left>
-      <div v-html="content" class="helloworld"></div>
-    </v-layout>
+    <div class="markdown-body">
+      <h2>{{this.title}}</h2>
+      <h3 class="my-5">{{this.author}}</h3>
+      <div v-html="content" class="text-left"></div>
+    </div>
   </v-container>
 </template>
 
+<style>
+.markdown-body {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 14px;
+}
 
+.markdown-body pre code::before,
+.markdown-body pre code::after {
+  content: none;
+  letter-spacing: 0em;
+}
 
-<style scoped lang="scss">
-@import url("https://cdn.bootcss.com/bootswatch/3.3.7/united/bootstrap.min.css");
+.markdown-body pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: #333333;
+  background-color: #f5f5f5;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Inconsolata, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code {
+  box-shadow: none;
+  font-size: 85%;
+  font-weight: 100%;
+}
+
+.markdown-body pre code {
+  color: #333;
+}
+
 @import url("https://cdn.bootcss.com/highlight.js/9.11.0/styles/github-gist.min.css");
 </style>
 
@@ -34,8 +77,12 @@ export default {
     //   smartypants: true
     // });
     marked.setOptions({
-      highlight: function(code) {
-        return hljs.highlightAuto(code).value;
+      highlight: function(code, lang) {
+        if (lang && lang !== "") {
+          return hljs.highlight(lang, code).value;
+        } else {
+          return hljs.highlightAuto(code).value;
+        }
       }
     });
 

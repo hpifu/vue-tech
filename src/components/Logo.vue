@@ -10,10 +10,10 @@ span.hlogo-title {
 </style>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Logo extends Vue {
-  @Prop({ default: "title" }) private value!: string;
+  @Prop({ default: 'title' }) private value!: string;
 }
 </script>

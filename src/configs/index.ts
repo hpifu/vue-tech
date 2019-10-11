@@ -1,14 +1,14 @@
-let configs = {
+const configs = {
     production: {
-        org: "HPiFu",
+        org: 'HPiFu',
         api: {
-            tech: "https://api.tech.hatlonely.com",
+            tech: 'https://api.tech.hatlonely.com',
         },
     },
     development: {
-        org: "HPiFu",
+        org: 'HPiFu',
         api: {
-            tech: "http://127.0.0.1:16063",
+            tech: 'http://127.0.0.1:16063',
         },
     },
 };

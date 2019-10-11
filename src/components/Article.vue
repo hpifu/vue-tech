@@ -44,10 +44,10 @@ export default {
       this.$route.params.id,
       res => {
         console.log(res);
-        if (res.status == 204) {
+        if (res.status === 204) {
           this.content = "204 NO CONTENT 没有该页面";
         }
-        if (res.status == 200) {
+        if (res.status === 200) {
           this.title = res.data.title;
           this.author = res.data.author;
           this.content = marked(res.data.content);

@@ -9,15 +9,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import Logo from "./Logo.vue";
-import SubLogo from "./SubLogo.vue";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import Logo from './Logo.vue';
+import SubLogo from './SubLogo.vue';
 
 @Component({
   components: {
     Logo,
-    SubLogo
-  }
+    SubLogo,
+  },
 })
 export default class Header extends Vue {}
 </script>

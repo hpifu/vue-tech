@@ -25,7 +25,7 @@ const mutations = {
         state.done = false;
         state.articles = [];
     },
-}
+};
 
 const actions = {
     loadMore({ commit, state }, callback) {
@@ -35,27 +35,27 @@ const actions = {
         api.getArticles({
             limit: state.limit,
             offset: state.offset,
-        }, res => {
+        }, (res) => {
             if (res.status == 204) {
                 // nothing to do
             }
             if (res.status == 200) {
-                commit("appendArticles", res.data);
+                commit('appendArticles', res.data);
                 if (res.data.length != state.limit) {
-                    commit("setDone", true);
+                    commit('setDone', true);
                 }
             }
-            commit("setOffset", state.offset + state.limit);
-            callback()
-        }, err => {
+            commit('setOffset', state.offset + state.limit);
+            callback();
+        }, (err) => {
             console.log(err);
-        })
-    }
-}
+        });
+    },
+};
 
 export default {
     namespaced: true,
     state,
     actions,
     mutations,
-}
+};

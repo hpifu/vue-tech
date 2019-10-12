@@ -55,27 +55,21 @@
   color: #333;
 }
 
-@import url("https://cdn.bootcss.com/highlight.js/9.11.0/styles/github-gist.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github-gist.min.css");
 </style>
+
+
 
 <script>
 import api from "../api";
-const marked = require("marked");
-import hljs from "highlight.js";
+
+// import from cdn in /public/index.html
+// import hljs from "highlight.js";
+// import marked from "marked";
 
 export default {
   beforeMount() {
     hljs.initHighlightingOnLoad();
-    // marked.setOptions({
-    //   renderer: new marked.Renderer(),
-    //   gfm: true,
-    //   tables: true,
-    //   breaks: true,
-    //   pedantic: true,
-    //   sanitize: true,
-    //   smartLists: true,
-    //   smartypants: true
-    // });
     marked.setOptions({
       highlight: function(code, lang) {
         if (lang && lang !== "") {

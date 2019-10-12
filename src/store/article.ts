@@ -2,7 +2,7 @@ import api from '../api';
 
 const states: any = {
     offset: 0,
-    limit: 20,
+    limit: 18,
     articles: [],
     done: false,
 };

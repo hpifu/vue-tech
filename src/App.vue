@@ -3,7 +3,7 @@
     <Header />
     <v-content>
       <v-layout align-center justify-center fill-height text-center row wrap mt-5>
-        <v-flex md6>
+        <v-flex xs10 sm10 md8 lg6>
           <v-layout align-center justify-center fill-height text-center row wrap>
             <transition name="slide-x-transition" mode="out-in">
               <router-view></router-view>
@@ -25,13 +25,13 @@
 </style>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Header from './components/Header.vue';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import Header from "./components/Header.vue";
 
 @Component({
   components: {
-    Header,
-  },
+    Header
+  }
 })
 export default class App extends Vue {}
 </script>

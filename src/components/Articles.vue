@@ -2,7 +2,7 @@
   <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
     <v-layout align-center justify-center fill-height text-center row wrap>
       <template v-for="(article, i) in articles">
-        <v-flex md4 :key="i" px-3 my-3 class="article-cards">
+        <v-flex xs12 sm6 md6 lg4 :key="i" px-3 py-3 class="article-cards">
           <v-card class="mx-auto pa-2" height="150" :to="'/article/'+article.id">
             <h2 class="mt-5">{{article.title}}</h2>
             <h3 class="my-5 cards-subtitle">{{article.author}}</h3>

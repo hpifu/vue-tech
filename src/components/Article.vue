@@ -58,14 +58,42 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github-gist.min.css");
 </style>
 
-
-
 <script>
 import api from "../api";
-
-// import from cdn in /public/index.html
-// import hljs from "highlight.js";
-// import marked from "marked";
+import marked from "marked";
+import hljs from "highlight.js/lib/highlight";
+hljs.registerLanguage("go", require("highlight.js/lib/languages/go"));
+hljs.registerLanguage("golang", require("highlight.js/lib/languages/go"));
+hljs.registerLanguage("swift", require("highlight.js/lib/languages/swift"));
+hljs.registerLanguage("dart", require("highlight.js/lib/languages/dart"));
+hljs.registerLanguage("python", require("highlight.js/lib/languages/python"));
+hljs.registerLanguage("py", require("highlight.js/lib/languages/python"));
+hljs.registerLanguage("js", require("highlight.js/lib/languages/javascript"));
+hljs.registerLanguage(
+  "javascript",
+  require("highlight.js/lib/languages/javascript")
+);
+hljs.registerLanguage("c", require("highlight.js/lib/languages/cpp"));
+hljs.registerLanguage("c++", require("highlight.js/lib/languages/cpp"));
+hljs.registerLanguage("cpp", require("highlight.js/lib/languages/cpp"));
+hljs.registerLanguage("sh", require("highlight.js/lib/languages/bash"));
+hljs.registerLanguage("bash", require("highlight.js/lib/languages/bash"));
+hljs.registerLanguage("shell", require("highlight.js/lib/languages/bash"));
+hljs.registerLanguage(
+  "Makefile",
+  require("highlight.js/lib/languages/makefile")
+);
+hljs.registerLanguage(
+  "makefile",
+  require("highlight.js/lib/languages/makefile")
+);
+hljs.registerLanguage("json", require("highlight.js/lib/languages/json"));
+hljs.registerLanguage("sql", require("highlight.js/lib/languages/sql"));
+hljs.registerLanguage(
+  "markdown",
+  require("highlight.js/lib/languages/markdown")
+);
+hljs.registerLanguage("md", require("highlight.js/lib/languages/markdown"));
 
 export default {
   beforeMount() {

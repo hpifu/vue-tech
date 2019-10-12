@@ -2,7 +2,7 @@
   <v-container>
     <div class="markdown-body">
       <h2>{{title}}</h2>
-      <h3 class="mt-5">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h3>
+      <h3 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h3>
       <h4 class="my-5">{{tags}}</h4>
       <div v-html="content" class="text-left"></div>
     </div>
@@ -10,7 +10,23 @@
 </template>
 
 <style>
-.markdown-body h3 {
+.markdown-body p {
+  margin: 0.5rem;
+}
+
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-body pre {
+  margin: 0.5rem;
+}
+
+.markdown-body .author {
   color: grey;
 }
 

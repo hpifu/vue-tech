@@ -94,6 +94,7 @@ hljs.registerLanguage(
   require("highlight.js/lib/languages/markdown")
 );
 hljs.registerLanguage("md", require("highlight.js/lib/languages/markdown"));
+hljs.registerLanguage("groovy", require("highlight.js/lib/languages/groovy"));
 
 export default {
   beforeMount() {

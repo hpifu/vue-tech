@@ -2,10 +2,35 @@
   <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
     <v-layout align-center justify-center fill-height text-center row wrap>
       <template v-for="(article, i) in articles">
-        <v-flex xs12 sm6 md6 lg4 :key="i" px-3 py-3 class="article-cards">
-          <v-card class="mx-auto pa-2" height="150" :to="'/article/'+article.id">
-            <h2 class="mt-5">{{article.title}}</h2>
-            <h3 class="my-5 cards-subtitle">{{article.author}}</h3>
+        <v-flex xs12 sm6 md6 :key="i" px-3 py-3 class="article-cards">
+          <v-card class="mx-auto pa-2" height="140" :to="'/article/'+article.id">
+            <v-card height="40" flat>
+              <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
+                <v-flex>
+                  <h2 class="ma-0 pa-0">{{article.title}}</h2>
+                </v-flex>
+              </v-layout>
+            </v-card>
+            <v-card height="40" flat>
+              <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
+                <v-flex>
+                  <template v-for="(tag, i) in article.tags">
+                    <v-chip class="mx-2 my-0" :key="i" v-if="i < 3">{{tag}}</v-chip>
+                  </template>
+                  <!-- <p class="ma-0 pa-0">{{article.tags.join(" ")}}</p> -->
+                </v-flex>
+              </v-layout>
+            </v-card>
+            <v-card height="40" flat>
+              <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
+                <v-flex>
+                  <p class="ma-0 pa-0">{{article.author}}</p>
+                </v-flex>
+                <v-flex>
+                  <p class="ma-0 pa-0">{{new Date(article.ctime).toLocaleString()}}</p>
+                </v-flex>
+              </v-layout>
+            </v-card>
           </v-card>
         </v-flex>
       </template>

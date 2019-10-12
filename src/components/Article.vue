@@ -1,14 +1,19 @@
 <template>
   <v-container>
     <div class="markdown-body">
-      <h2>{{this.title}}</h2>
-      <h3 class="my-5">{{this.author}}</h3>
+      <h2>{{title}}</h2>
+      <h3 class="mt-5">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h3>
+      <h4 class="my-5">{{tags}}</h4>
       <div v-html="content" class="text-left"></div>
     </div>
   </v-container>
 </template>
 
 <style>
+.markdown-body h3 {
+  color: grey;
+}
+
 .markdown-body {
   font-family: "Josefin Sans", sans-serif;
   font-size: 14px;
@@ -95,6 +100,7 @@ hljs.registerLanguage(
 );
 hljs.registerLanguage("md", require("highlight.js/lib/languages/markdown"));
 hljs.registerLanguage("groovy", require("highlight.js/lib/languages/groovy"));
+hljs.registerLanguage("ruby", require("highlight.js/lib/languages/ruby"));
 
 export default {
   beforeMount() {
@@ -120,6 +126,10 @@ export default {
           this.title = res.data.title;
           this.author = res.data.author;
           this.content = marked(res.data.content);
+          this.utime = res.data.utime;
+          this.ctime = res.data.ctime;
+          // this.tags = res.data.tags;
+          this.tags = res.data.tags.map(i => "#" + i).join("  ");
         }
       },
       err => {
@@ -131,7 +141,10 @@ export default {
     return {
       title: "",
       author: "",
-      content: ""
+      content: "",
+      utime: "",
+      ctime: "",
+      tags: ""
     };
   }
 };

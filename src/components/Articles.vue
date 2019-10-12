@@ -17,7 +17,6 @@
                   <template v-for="(tag, i) in article.tags">
                     <v-chip class="mx-2 my-0" :key="i" v-if="i < 3">{{tag}}</v-chip>
                   </template>
-                  <!-- <p class="ma-0 pa-0">{{article.tags.join(" ")}}</p> -->
                 </v-flex>
               </v-layout>
             </v-card>

@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Provide, Component, Prop, Vue } from 'vue-property-decorator';
 import Logo from './Logo.vue';
 import SubLogo from './SubLogo.vue';
 
@@ -38,5 +38,7 @@ import SubLogo from './SubLogo.vue';
     SubLogo,
   },
 })
-export default class Header extends Vue {}
+export default class Header extends Vue {
+  @Provide() private loadSuccess: boolean = true;
+}
 </script>

@@ -15,7 +15,14 @@
               <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
                 <v-flex>
                   <template v-for="(tag, i) in article.tags">
-                    <v-chip class="mx-2 my-0" :key="i" v-if="i < 3">{{tag}}</v-chip>
+                    <v-chip
+                      outlined
+                      small
+                      color="green"
+                      class="mx-2 my-0"
+                      :key="i"
+                      v-if="i < 3"
+                    >#{{tag}}</v-chip>
                   </template>
                 </v-flex>
               </v-layout>

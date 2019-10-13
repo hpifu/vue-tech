@@ -9,7 +9,7 @@ const configs: any = {
         web: {
             account: 'https://account.hatlonely.com',
             tech: 'https://tech.hatlonely.com',
-        }
+        },
     },
     development: {
         org: 'HPiFu',
@@ -21,7 +21,7 @@ const configs: any = {
         web: {
             account: 'http://127.0.0.1:4000',
             tech: 'http://127.0.0.1:4001',
-        }
+        },
     },
 };
 

@@ -25,7 +25,7 @@
 </style>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Provide, Component, Prop, Vue } from 'vue-property-decorator';
 import Header from './components/Header.vue';
 
 @Component({
@@ -34,6 +34,8 @@ import Header from './components/Header.vue';
   },
 })
 export default class App extends Vue {
+  @Provide() private loading: boolean = false;
+
   public created() {
     this.loading = true;
     if (this.$cookies.get('token')) {

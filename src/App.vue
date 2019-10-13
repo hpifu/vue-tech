@@ -3,13 +3,9 @@
     <Header />
     <v-content>
       <v-layout align-center justify-center fill-height text-center row wrap mt-5>
-        <v-flex xs10 sm10 md8 lg6>
-          <v-layout align-center justify-center fill-height text-center row wrap>
-            <transition name="slide-x-transition" mode="out-in">
-              <router-view></router-view>
-            </transition>
-          </v-layout>
-        </v-flex>
+        <transition name="slide-x-transition" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </v-layout>
     </v-content>
   </v-app>

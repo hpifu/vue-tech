@@ -1,17 +1,26 @@
 <template>
-  <v-container>
-    <div class="markdown-body">
-      <h2>{{title}}</h2>
-      <h4 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h4>
-      <template v-for="(tag, i) in tags">
-        <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
-      </template>
-      <v-btn class="ma-2" outlined x-small fab color="indigo">
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
-      <div v-html="content" class="text-left"></div>
-    </div>
-  </v-container>
+  <v-flex xs10 sm10 md8 lg6>
+    <v-layout align-center justify-center fill-height text-center row wrap>
+      <div class="markdown-body">
+        <h2>{{title}}</h2>
+        <h4 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h4>
+        <template v-for="(tag, i) in tags">
+          <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
+        </template>
+        <v-btn
+          class="ma-2"
+          outlined
+          x-small
+          fab
+          color="indigo"
+          :to="'/edit/' + this.$route.params.id"
+        >
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+        <div v-html="content" class="text-left"></div>
+      </div>
+    </v-layout>
+  </v-flex>
 </template>
 
 <style>
@@ -87,56 +96,8 @@
 <script lang="ts">
 import api from '../api';
 import marked from 'marked';
-import hljs from 'highlight.js/lib/highlight';
+import hljs from '../assets/ts/hljs';
 import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
-
-import cpp from 'highlight.js/lib/languages/cpp';
-hljs.registerLanguage('cpp', cpp);
-hljs.registerLanguage('c', cpp);
-hljs.registerLanguage('c++', cpp);
-
-import golang from 'highlight.js/lib/languages/go';
-hljs.registerLanguage('go', golang);
-hljs.registerLanguage('golang', golang);
-
-import swift from 'highlight.js/lib/languages/swift';
-hljs.registerLanguage('swift', swift);
-
-import dart from 'highlight.js/lib/languages/dart';
-hljs.registerLanguage('dart', dart);
-
-import python from 'highlight.js/lib/languages/python';
-hljs.registerLanguage('python', python);
-hljs.registerLanguage('py', python);
-
-import javascript from 'highlight.js/lib/languages/javascript';
-hljs.registerLanguage('js', javascript);
-hljs.registerLanguage('javascript', javascript);
-
-import bash from 'highlight.js/lib/languages/bash';
-hljs.registerLanguage('sh', bash);
-hljs.registerLanguage('bash', bash);
-hljs.registerLanguage('shell', bash);
-
-import makefile from 'highlight.js/lib/languages/makefile';
-hljs.registerLanguage('makefile', makefile);
-hljs.registerLanguage('Makefile', makefile);
-
-import json from 'highlight.js/lib/languages/json';
-hljs.registerLanguage('json', json);
-
-import sql from 'highlight.js/lib/languages/sql';
-hljs.registerLanguage('sql', sql);
-
-import markdown from 'highlight.js/lib/languages/markdown';
-hljs.registerLanguage('md', markdown);
-hljs.registerLanguage('markdown', markdown);
-
-import groovy from 'highlight.js/lib/languages/groovy';
-hljs.registerLanguage('groovy', groovy);
-
-import ruby from 'highlight.js/lib/languages/ruby';
-hljs.registerLanguage('ruby', ruby);
 
 @Component({})
 export default class Article extends Vue {
@@ -148,12 +109,11 @@ export default class Article extends Vue {
   @Provide() private tags: string = '';
 
   public beforeMount() {
-    hljs.initHighlightingOnLoad();
     marked.setOptions({
       highlight(code: any, lang: any) {
-        if (lang && lang !== '') {
+        try {
           return hljs.highlight(lang, code).value;
-        } else {
+        } catch (err) {
           return hljs.highlightAuto(code).value;
         }
       },

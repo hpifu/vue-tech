@@ -6,6 +6,10 @@ const configs: any = {
             cloud: 'https://api.cloud.hatlonely.com',
             tech: 'https://api.tech.hatlonely.com',
         },
+        web: {
+            account: 'https://account.hatlonely.com',
+            tech: 'https://tech.hatlonely.com',
+        }
     },
     development: {
         org: 'HPiFu',
@@ -14,6 +18,10 @@ const configs: any = {
             cloud: 'http://127.0.0.1:16061',
             tech: 'http://127.0.0.1:16063',
         },
+        web: {
+            account: 'http://127.0.0.1:4000',
+            tech: 'http://127.0.0.1:4001',
+        }
     },
 };
 

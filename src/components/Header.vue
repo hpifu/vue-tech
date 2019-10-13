@@ -10,11 +10,16 @@
     </v-btn>
     <v-btn
       v-if="this.$store.state.account.email == ''"
-      href="https://account.hatlonely.com/signin"
+      :href="this.$config.web.account + '/signin?from=' + this.$config.web.tech"
       color="primary"
       depressed
     >登录</v-btn>
-    <v-btn v-else href="https://account.hatlonely.com/signin" color="#fafafa" depressed>
+    <v-btn
+      v-else
+      :href="this.$config.web.account + '/signin?from=' + this.$config.web.tech"
+      color="#fafafa"
+      depressed
+    >
       <v-avatar size="30">
         <v-img
           v-if="this.$store.state.account.avatar && loadSuccess"

@@ -65,7 +65,7 @@
 </style>
 
 <script lang="ts">
-import { Component, Prop, Vue, Provide } from "vue-property-decorator";
+import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
 
 @Component({})
 export default class Articles extends Vue {
@@ -77,7 +77,7 @@ export default class Articles extends Vue {
       this.busy = false;
       return;
     }
-    this.$store.dispatch("article/loadMore", () => {
+    this.$store.dispatch('article/loadMore', () => {
       this.busy = false;
     });
   }

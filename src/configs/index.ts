@@ -2,15 +2,17 @@ const configs: any = {
     production: {
         org: 'HPiFu',
         api: {
-            tech: 'https://api.tech.hatlonely.com',
             account: 'https://api.account.hatlonely.com',
+            cloud: 'https://api.cloud.hatlonely.com',
+            tech: 'https://api.tech.hatlonely.com',
         },
     },
     development: {
         org: 'HPiFu',
         api: {
+            account: 'http://127.0.0.1:16060',
+            cloud: 'http://127.0.0.1:16061',
             tech: 'http://127.0.0.1:16063',
-            account: 'http://127.0.0.1:16061',
         },
     },
 };

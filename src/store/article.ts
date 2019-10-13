@@ -7,7 +7,7 @@ const states: any = {
     done: false,
 };
 
-const mutations = {
+const mutations: any = {
     setOffset(state: any, value: number) {
         state.offset = value;
     },
@@ -32,7 +32,7 @@ const actions = {
         if (state.Done) {
             return;
         }
-        api.getArticles({
+        api.tech.getArticles({
             limit: state.limit,
             offset: state.offset,
         }, (res: any) => {

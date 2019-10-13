@@ -1,19 +1,7 @@
-import axios from 'axios';
-import config from '../configs';
+import tech from './tech';
+import account from './account';
 
 export default {
-    getArticles({ offset, limit }: { offset: number, limit: number }, callback: any, fallback: any) {
-        axios.get(config.api.tech + '/article', {
-            params: {
-                offset,
-                limit,
-            },
-            withCredentials: true,
-        }).then(callback).catch(fallback);
-    },
-    getArticle(id: number | string, callback: any, fallback: any) {
-        axios.get(config.api.tech + '/article/' + id, {
-            withCredentials: true,
-        }).then(callback).catch(fallback);
-    },
+    tech,
+    account,
 };

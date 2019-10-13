@@ -154,7 +154,7 @@ export default class Article extends Vue {
       },
     });
 
-    api.getArticle(
+    api.tech.getArticle(
       this.$route.params.id,
       (res: any) => {
         if (res.status === 204) {
@@ -165,7 +165,6 @@ export default class Article extends Vue {
           this.author = res.data.author;
           this.utime = res.data.utime;
           this.ctime = res.data.ctime;
-          // this.tags = res.data.tags;
           this.tags = res.data.tags.map((i: string) => '#' + i).join('  ');
           this.content = marked(res.data.content);
         }

@@ -7,3 +7,4 @@ declare module 'vue-infinite-scroll';
 declare module 'marked';
 declare module 'highlight.js/lib/highlight';
 declare module 'highlight.js/lib/languages/*';
+declare module 'vue-config';

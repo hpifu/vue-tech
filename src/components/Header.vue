@@ -5,6 +5,25 @@
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
+    <v-btn text icon>
+      <v-icon>mdi-view-grid</v-icon>
+    </v-btn>
+    <v-btn
+      v-if="this.$store.state.account.email == ''"
+      href="https://account.hatlonely.com/signin"
+      color="primary"
+      depressed
+    >登录</v-btn>
+    <v-btn v-else href="https://account.hatlonely.com/signin" color="#fafafa" depressed>
+      <v-avatar size="30">
+        <v-img
+          v-if="this.$store.state.account.avatar && loadSuccess"
+          v-on:error="loadSuccess = false"
+          :src="this.$config.api.cloud + '/resource/' + this.$cookies.get('token') + '?name=' + this.$store.state.account.avatar"
+        ></v-img>
+        <v-icon v-else large>mdi-account-circle</v-icon>
+      </v-avatar>
+    </v-btn>
   </v-app-bar>
 </template>
 

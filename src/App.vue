@@ -33,5 +33,17 @@ import Header from './components/Header.vue';
     Header,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  public created() {
+    this.loading = true;
+    if (this.$cookies.get('token')) {
+      try {
+        this.$store.dispatch('account/getAccount', this.$cookies.get('token'));
+      } catch (error) {
+        // console.log(error);
+      }
+    }
+    this.loading = false;
+  }
+}
 </script>

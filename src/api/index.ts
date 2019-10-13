@@ -11,7 +11,7 @@ export default {
             withCredentials: true,
         }).then(callback).catch(fallback);
     },
-    getArticle(id: number, callback: any, fallback: any) {
+    getArticle(id: number | string, callback: any, fallback: any) {
         axios.get(config.api.tech + '/article/' + id, {
             withCredentials: true,
         }).then(callback).catch(fallback);

@@ -79,91 +79,103 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github-gist.min.css");
 </style>
 
-<script>
-import api from "../api";
-import marked from "marked";
-import hljs from "highlight.js/lib/highlight";
-hljs.registerLanguage("go", require("highlight.js/lib/languages/go"));
-hljs.registerLanguage("golang", require("highlight.js/lib/languages/go"));
-hljs.registerLanguage("swift", require("highlight.js/lib/languages/swift"));
-hljs.registerLanguage("dart", require("highlight.js/lib/languages/dart"));
-hljs.registerLanguage("python", require("highlight.js/lib/languages/python"));
-hljs.registerLanguage("py", require("highlight.js/lib/languages/python"));
-hljs.registerLanguage("js", require("highlight.js/lib/languages/javascript"));
-hljs.registerLanguage(
-  "javascript",
-  require("highlight.js/lib/languages/javascript")
-);
-hljs.registerLanguage("c", require("highlight.js/lib/languages/cpp"));
-hljs.registerLanguage("c++", require("highlight.js/lib/languages/cpp"));
-hljs.registerLanguage("cpp", require("highlight.js/lib/languages/cpp"));
-hljs.registerLanguage("sh", require("highlight.js/lib/languages/bash"));
-hljs.registerLanguage("bash", require("highlight.js/lib/languages/bash"));
-hljs.registerLanguage("shell", require("highlight.js/lib/languages/bash"));
-hljs.registerLanguage(
-  "Makefile",
-  require("highlight.js/lib/languages/makefile")
-);
-hljs.registerLanguage(
-  "makefile",
-  require("highlight.js/lib/languages/makefile")
-);
-hljs.registerLanguage("json", require("highlight.js/lib/languages/json"));
-hljs.registerLanguage("sql", require("highlight.js/lib/languages/sql"));
-hljs.registerLanguage(
-  "markdown",
-  require("highlight.js/lib/languages/markdown")
-);
-hljs.registerLanguage("md", require("highlight.js/lib/languages/markdown"));
-hljs.registerLanguage("groovy", require("highlight.js/lib/languages/groovy"));
-hljs.registerLanguage("ruby", require("highlight.js/lib/languages/ruby"));
+<script lang="ts">
+import api from '../api';
+import marked from 'marked';
+import hljs from 'highlight.js/lib/highlight';
+import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
 
-export default {
-  beforeMount() {
+import cpp from 'highlight.js/lib/languages/cpp';
+hljs.registerLanguage('cpp', cpp);
+hljs.registerLanguage('c', cpp);
+hljs.registerLanguage('c++', cpp);
+
+import golang from 'highlight.js/lib/languages/go';
+hljs.registerLanguage('go', golang);
+hljs.registerLanguage('golang', golang);
+
+import swift from 'highlight.js/lib/languages/swift';
+hljs.registerLanguage('swift', swift);
+
+import dart from 'highlight.js/lib/languages/dart';
+hljs.registerLanguage('dart', dart);
+
+import python from 'highlight.js/lib/languages/python';
+hljs.registerLanguage('python', python);
+hljs.registerLanguage('py', python);
+
+import javascript from 'highlight.js/lib/languages/javascript';
+hljs.registerLanguage('js', javascript);
+hljs.registerLanguage('javascript', javascript);
+
+import bash from 'highlight.js/lib/languages/bash';
+hljs.registerLanguage('sh', bash);
+hljs.registerLanguage('bash', bash);
+hljs.registerLanguage('shell', bash);
+
+import makefile from 'highlight.js/lib/languages/makefile';
+hljs.registerLanguage('makefile', makefile);
+hljs.registerLanguage('Makefile', makefile);
+
+import json from 'highlight.js/lib/languages/json';
+hljs.registerLanguage('json', json);
+
+import sql from 'highlight.js/lib/languages/sql';
+hljs.registerLanguage('sql', sql);
+
+import markdown from 'highlight.js/lib/languages/markdown';
+hljs.registerLanguage('md', markdown);
+hljs.registerLanguage('markdown', markdown);
+
+import groovy from 'highlight.js/lib/languages/groovy';
+hljs.registerLanguage('groovy', groovy);
+
+import ruby from 'highlight.js/lib/languages/ruby';
+hljs.registerLanguage('ruby', ruby);
+
+@Component({})
+export default class Article extends Vue {
+  @Provide() private title: string = '';
+  @Provide() private author: string = '';
+  @Provide() private content: string = '';
+  @Provide() private utime: string = '';
+  @Provide() private ctime: string = '';
+  @Provide() private tags: string = '';
+
+  public beforeMount() {
     hljs.initHighlightingOnLoad();
     marked.setOptions({
-      highlight: function(code, lang) {
-        if (lang && lang !== "") {
+      highlight(code: any, lang: any) {
+        if (lang && lang !== '') {
           return hljs.highlight(lang, code).value;
         } else {
           return hljs.highlightAuto(code).value;
         }
-      }
+      },
     });
 
     api.getArticle(
       this.$route.params.id,
-      res => {
-        console.log(res);
+      (res: any) => {
         if (res.status === 204) {
-          this.content = "204 NO CONTENT 没有该页面";
+          this.content = '204 NO CONTENT 没有该页面';
         }
         if (res.status === 200) {
           this.title = res.data.title;
           this.author = res.data.author;
-          this.content = marked(res.data.content);
           this.utime = res.data.utime;
           this.ctime = res.data.ctime;
           // this.tags = res.data.tags;
-          this.tags = res.data.tags.map(i => "#" + i).join("  ");
+          this.tags = res.data.tags.map((i: string) => '#' + i).join('  ');
+          this.content = marked(res.data.content);
         }
       },
-      err => {
-        console.log(err);
-      }
+      (err: any) => {
+        // console.log(err);
+      },
     );
-  },
-  data() {
-    return {
-      title: "",
-      author: "",
-      content: "",
-      utime: "",
-      ctime: "",
-      tags: ""
-    };
   }
-};
+}
 </script>
 
 

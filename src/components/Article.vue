@@ -2,8 +2,13 @@
   <v-container>
     <div class="markdown-body">
       <h2>{{title}}</h2>
-      <h3 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h3>
-      <h4 class="my-5">{{tags}}</h4>
+      <h4 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h4>
+      <template v-for="(tag, i) in tags">
+        <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
+      </template>
+      <v-btn class="ma-2" outlined x-small fab color="indigo">
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
       <div v-html="content" class="text-left"></div>
     </div>
   </v-container>
@@ -165,7 +170,7 @@ export default class Article extends Vue {
           this.author = res.data.author;
           this.utime = res.data.utime;
           this.ctime = res.data.ctime;
-          this.tags = res.data.tags.map((i: string) => '#' + i).join('  ');
+          this.tags = res.data.tags;
           this.content = marked(res.data.content);
         }
       },

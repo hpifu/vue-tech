@@ -9,7 +9,7 @@
       <v-icon>mdi-view-grid</v-icon>
     </v-btn>
     <v-btn
-      v-if="this.$store.state.account.email == ''"
+      v-if="!this.$store.state.account.isSignedIn"
       :href="this.$config.web.account + '/signin?from=' + this.$config.web.tech"
       color="primary"
       depressed

@@ -64,34 +64,26 @@
 }
 </style>
 
-<script>
-export default {
-  methods: {
-    loadMore() {
-      this.busy = true;
-      if (this.$store.state.article.done) {
-        this.busy = false;
-        return;
-      }
-      this.$store.dispatch("article/loadMore", () => {
-        this.busy = false;
-      });
+<script lang="ts">
+import { Component, Prop, Vue, Provide } from "vue-property-decorator";
+
+@Component({})
+export default class Articles extends Vue {
+  @Provide() private busy: boolean = false;
+
+  public loadMore() {
+    this.busy = true;
+    if (this.$store.state.article.done) {
+      this.busy = false;
+      return;
     }
-  },
-  computed: {
-    articles: {
-      get() {
-        return this.$store.state.article.articles;
-      },
-      set(articles) {
-        this.$store.commit("article/setAncients", articles);
-      }
-    }
-  },
-  data() {
-    return {
-      busy: false
-    };
+    this.$store.dispatch("article/loadMore", () => {
+      this.busy = false;
+    });
   }
-};
+
+  get articles() {
+    return this.$store.state.article.articles;
+  }
+}
 </script>

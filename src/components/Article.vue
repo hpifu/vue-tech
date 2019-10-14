@@ -8,6 +8,7 @@
           <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
         </template>
         <v-btn
+          v-if="this.$store.state.account.isSignedIn"
           class="ma-2"
           outlined
           x-small

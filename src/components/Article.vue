@@ -5,7 +5,10 @@
         <div class="markdown-body">
           <h2>{{title}}</h2>
 
-          <h4 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h4>
+          <h4 class="mt-5 author">
+            <avatar disable />
+            {{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}
+          </h4>
           <template v-for="(tag, i) in tags">
             <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
           </template>
@@ -106,8 +109,13 @@ import api from '../api';
 import marked from 'marked';
 import hljs from '../assets/ts/hljs';
 import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
+import Avatar from './Avatar.vue';
 
-@Component({})
+@Component({
+  components: {
+    Avatar,
+  },
+})
 export default class Article extends Vue {
   @Provide() private title: string = '';
   @Provide() private author: string = '';

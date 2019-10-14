@@ -5,18 +5,34 @@
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
-    <v-btn class="ma-2" outlined x-small fab color="indigo" to="/newpost">
+    <v-btn
+      v-if="this.$store.state.account.isSignedIn"
+      class="ma-2"
+      outlined
+      x-small
+      fab
+      color="indigo"
+      to="/newpost"
+    >
       <v-icon>mdi-open-in-new</v-icon>
     </v-btn>
     <v-btn class="ma-2" outlined x-small fab color="indigo">
       <v-icon>mdi-view-grid</v-icon>
     </v-btn>
+    <v-btn class="ma-2" outlined x-small fab color="indigo" to="/">
+      <v-icon>mdi-home</v-icon>
+    </v-btn>
     <v-btn
       v-if="!this.$store.state.account.isSignedIn"
       :href="this.$config.web.account + '/signin?from=' + this.$config.web.tech"
-      color="primary"
-      depressed
-    >登录</v-btn>
+      class="ma-2"
+      outlined
+      x-small
+      fab
+      color="indigo"
+    >
+      <v-icon>mdi-login</v-icon>
+    </v-btn>
     <v-btn
       v-else
       :href="this.$config.web.account + '/signin?from=' + this.$config.web.tech"

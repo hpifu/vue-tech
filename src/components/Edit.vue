@@ -21,6 +21,9 @@
               <v-btn class="ma-2" outlined x-small fab color="indigo" @click="save">
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>
+              <v-btn class="ma-2" outlined x-small fab color="error" @click="del">
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -193,6 +196,26 @@ export default class Article extends Vue {
     if (val) {
       this.markedContent = marked(val);
     }
+  }
+
+  public del() {
+    this.loading = true;
+    api.tech.delArticle(
+      { id: this.$route.params.id, token: this.$cookies.get('token') },
+      (res: any) => {
+        this.loading = false;
+        this.$router.push('/');
+      },
+      (err: any) => {
+        this.loading = false;
+        this.alert = true;
+        if (err.response.status == 400) {
+          this.alertMessage = err.response.data;
+        } else {
+          this.alertMessage = err;
+        }
+      },
+    );
   }
 
   public save() {

@@ -17,6 +17,14 @@ export default {
             withCredentials: true,
         }).then(callback).catch(fallback);
     },
+    delArticle({ token, id }: { token: any, id: number | string }, callback: any, fallback: any) {
+        axios.delete(config.api.tech + '/article/' + id, {
+            headers: {
+                Authorization: token,
+            },
+            withCredentials: true,
+        }).then(callback).catch(fallback);
+    },
     putArticle(
         { token, title, tags, content, id }: {
             token: any, id: string | number,

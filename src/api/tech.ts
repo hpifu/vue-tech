@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import config from '../configs';
 
 export default {
@@ -13,6 +14,45 @@ export default {
     },
     getArticle(id: number | string, callback: any, fallback: any) {
         axios.get(config.api.tech + '/article/' + id, {
+            withCredentials: true,
+        }).then(callback).catch(fallback);
+    },
+    putArticle(
+        { token, title, tags, content, id }: {
+            token: any, id: string | number,
+            title: string | undefined,
+            tags: string[] | undefined,
+            content: string | undefined,
+        },
+        callback: any, fallback: any,
+    ) {
+        axios.put(config.api.tech + '/article/' + id, {
+            title,
+            tags,
+            content,
+        }, {
+            headers: {
+                Authorization: token,
+            },
+            withCredentials: true,
+        }).then(callback).catch(fallback);
+    },
+    postArticle(
+        { token, title, tags, content }: {
+            token: any, title: string | undefined,
+            tags: string[] | undefined,
+            content: string | undefined,
+        },
+        callback: any, fallback: any,
+    ) {
+        axios.post(config.api.tech + '/article', {
+            title,
+            tags,
+            content,
+        }, {
+            headers: {
+                Authorization: token,
+            },
             withCredentials: true,
         }).then(callback).catch(fallback);
     },

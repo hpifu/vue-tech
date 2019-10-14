@@ -1,6 +1,7 @@
 import api from '../api';
 
 const states: any = {
+    id: 0,
     firstName: '',
     lastName: '',
     email: '',
@@ -13,6 +14,9 @@ const states: any = {
 };
 
 const mutations = {
+    setID(state: any, value: number) {
+        state.id = value;
+    },
     setFirstName(state: any, value: string) {
         state.firstName = value;
     },
@@ -34,7 +38,7 @@ const mutations = {
     setBirthday(state: any, value: string) {
         state.birthday = value;
     },
-    setGender(state: any, value: string) {
+    setGender(state: any, value: number) {
         state.gender = value;
     },
     setIsSignedIn(state: any, value: boolean) {
@@ -50,14 +54,15 @@ const actions = {
         api.account.getAccount(token, (res: any) => {
             if (res.status === 200) {
                 const account = res.data;
+                commit('setID', account.id);
                 commit('setFirstName', account.firstName);
                 commit('setLastName', account.lastName);
                 commit('setEmail', account.email);
                 commit('setPhone', account.phone);
                 commit('setBirthday', account.birthday);
                 commit('setGender', account.gender);
-                commit('setIsSignedIn', true);
                 commit('setAvatar', account.avatar);
+                commit('setIsSignedIn', true);
             }
         }, (err: any) => {
             // console.log(err)

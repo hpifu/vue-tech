@@ -1,16 +1,23 @@
 <template>
   <v-flex xs10 sm10 md10 lg10>
-    <v-layout fill-height text-center row wrap>
+    <!-- mdi-content-save -->
+    <v-layout text-center row wrap>
       <v-flex md12 text-center>
-        <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
+        <v-layout align-center justify-center text-center row wrap pa-0 ma-0>
+          <v-flex md3></v-flex>
           <v-flex md6>
             <v-text-field v-model="title" v-if="titleEdit" @blur="titleEdit = false" autofocus></v-text-field>
             <h2 v-else @click="titleEdit = true">{{title}}</h2>
           </v-flex>
+          <v-flex md3>
+            <v-btn class="ma-2" outlined x-small fab color="indigo" @click="save">
+              <v-icon>mdi-content-save</v-icon>
+            </v-btn>
+          </v-flex>
         </v-layout>
       </v-flex>
       <v-flex md12 mb-5>
-        <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
+        <v-layout align-center justify-center text-center row wrap pa-0 ma-0>
           <v-flex md6>
             <v-text-field v-model="tagstr" v-if="tagEdit" @blur="tagEdit = false" autofocus></v-text-field>
             <v-container v-else @click="tagEdit = true">
@@ -169,8 +176,27 @@ export default class Article extends Vue {
     this.markedContent = marked(val);
   }
 
+  public save() {
+    api.tech.putArticle(
+      {
+        token: this.$cookies.get('token'),
+        tags: this.tags,
+        title: this.title,
+        content: this.content,
+        id: this.$route.params.id,
+      },
+      (res: any) => {
+        if (res.status === 202) {
+          console.log('success');
+        }
+      },
+      (err: any) => {
+        console.log(err);
+      },
+    );
+  }
+
   public beforeMount() {
-    hljs.initHighlightingOnLoad();
     marked.setOptions({
       highlight(code: any, lang: any) {
         try {

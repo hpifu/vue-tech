@@ -1,6 +1,6 @@
 <template>
   <v-flex xs10 sm10 md8 lg6>
-    <v-layout align-center justify-center fill-height text-center row wrap>
+    <v-layout justify-center fill-height text-center row wrap>
       <div class="markdown-body">
         <h2>{{title}}</h2>
         <h4 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h4>
@@ -8,7 +8,7 @@
           <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
         </template>
         <v-btn
-          v-if="this.$store.state.account.isSignedIn"
+          v-if="this.$store.state.account.isSignedIn && this.authorID === this.$store.state.account.id"
           class="ma-2"
           outlined
           x-small
@@ -104,6 +104,7 @@ import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
 export default class Article extends Vue {
   @Provide() private title: string = '';
   @Provide() private author: string = '';
+  @Provide() private authorID: number = 0;
   @Provide() private content: string = '';
   @Provide() private utime: string = '';
   @Provide() private ctime: string = '';
@@ -128,6 +129,7 @@ export default class Article extends Vue {
         }
         if (res.status === 200) {
           this.title = res.data.title;
+          this.authorID = res.data.authorID;
           this.author = res.data.author;
           this.utime = res.data.utime;
           this.ctime = res.data.ctime;

@@ -10,7 +10,7 @@
             {{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}
           </h4>
           <template v-for="(tag, i) in tags">
-            <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
+            <v-chip outlined color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
           </template>
           <v-btn
             v-if="this.$store.state.account.isSignedIn && this.authorID === this.$store.state.account.id"

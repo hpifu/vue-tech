@@ -1,6 +1,6 @@
 <template>
   <v-flex xs10 sm10 md10 lg10>
-    <v-card :loading="loading" flat pa-0 ma-0 class="editcard">
+    <v-card :loading="loading" flat pa-0 ma-0 class="fafafa-card">
       <v-alert
         v-model="alert"
         outlined
@@ -54,7 +54,7 @@
 </template>
 
 <style>
-.editcard.theme--light.v-card {
+.fafafa-card.theme--light.v-card {
   background-color: #fafafa;
 }
 

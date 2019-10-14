@@ -33,24 +33,11 @@
     >
       <v-icon>mdi-login</v-icon>
     </v-btn>
-    <v-btn
-      v-else
+    <avatar
       :href="this.$config.web.account + '/signin?from=' + this.$config.web.tech"
-      color="green"
-      class="ma-2"
-      outlined
-      x-small
-      fab
-    >
-      <v-avatar size="30">
-        <v-img
-          v-if="this.$store.state.account.avatar && loadSuccess"
-          v-on:error="loadSuccess = false"
-          :src="this.$config.api.cloud + '/resource/' + this.$cookies.get('token') + '?name=' + this.$store.state.account.avatar"
-        ></v-img>
-        <v-icon v-else>mdi-account-circle</v-icon>
-      </v-avatar>
-    </v-btn>
+      :ifcond="this.$store.state.account.avatar"
+      :src="this.$config.api.cloud + '/resource/' + this.$cookies.get('token') + '?name=' + this.$store.state.account.avatar"
+    />
   </v-app-bar>
 </template>
 
@@ -58,11 +45,13 @@
 import { Provide, Component, Prop, Vue } from 'vue-property-decorator';
 import Logo from './Logo.vue';
 import SubLogo from './SubLogo.vue';
+import Avatar from './Avatar.vue';
 
 @Component({
   components: {
     Logo,
     SubLogo,
+    Avatar,
   },
 })
 export default class Header extends Vue {

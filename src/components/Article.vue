@@ -1,30 +1,37 @@
 <template>
   <v-flex xs10 sm10 md8 lg6>
-    <v-layout justify-center fill-height text-center row wrap>
-      <div class="markdown-body">
-        <h2>{{title}}</h2>
-        <h4 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h4>
-        <template v-for="(tag, i) in tags">
-          <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
-        </template>
-        <v-btn
-          v-if="this.$store.state.account.isSignedIn && this.authorID === this.$store.state.account.id"
-          class="ma-2"
-          outlined
-          x-small
-          fab
-          color="indigo"
-          :to="'/edit/' + this.$route.params.id"
-        >
-          <v-icon>mdi-pencil</v-icon>
-        </v-btn>
-        <div v-html="content" class="text-left"></div>
-      </div>
-    </v-layout>
+    <v-card :loading="loading" flat pa-0 ma-0 class="fafafa-card">
+      <v-layout justify-center fill-height text-center row wrap>
+        <div class="markdown-body">
+          <h2>{{title}}</h2>
+
+          <h4 class="mt-5 author">{{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}</h4>
+          <template v-for="(tag, i) in tags">
+            <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
+          </template>
+          <v-btn
+            v-if="this.$store.state.account.isSignedIn && this.authorID === this.$store.state.account.id"
+            class="ma-2"
+            outlined
+            x-small
+            fab
+            color="indigo"
+            :to="'/edit/' + this.$route.params.id"
+          >
+            <v-icon>mdi-pencil</v-icon>
+          </v-btn>
+          <div v-html="content" class="text-left"></div>
+        </div>
+      </v-layout>
+    </v-card>
   </v-flex>
 </template>
 
 <style>
+.fafafa-card.theme--light.v-card {
+  background-color: #fafafa;
+}
+
 .markdown-body p {
   margin: 0.5rem;
 }
@@ -109,6 +116,7 @@ export default class Article extends Vue {
   @Provide() private utime: string = '';
   @Provide() private ctime: string = '';
   @Provide() private tags: string = '';
+  @Provide() private loading: boolean = false;
 
   public beforeMount() {
     marked.setOptions({
@@ -121,9 +129,11 @@ export default class Article extends Vue {
       },
     });
 
+    this.loading = true;
     api.tech.getArticle(
       this.$route.params.id,
       (res: any) => {
+        this.loading = false;
         if (res.status === 204) {
           this.content = '204 NO CONTENT 没有该页面';
         }
@@ -138,6 +148,7 @@ export default class Article extends Vue {
         }
       },
       (err: any) => {
+        this.loading = false;
         // console.log(err);
       },
     );

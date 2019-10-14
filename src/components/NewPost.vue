@@ -1,7 +1,7 @@
 <template>
   <v-flex xs10 sm10 md10 lg10>
     <v-card :loading="loading" flat pa-0 ma-0 class="editcard">
-      <v-layout text-center row wrap pa-0 ma-0>
+      <v-layout text-center row wrap>
         <v-flex md12 text-center>
           <v-layout align-center justify-center text-center row wrap pa-0 ma-0>
             <v-flex md3></v-flex>
@@ -150,13 +150,13 @@ import 'codemirror/lib/codemirror.css';
   },
 })
 export default class Article extends Vue {
-  @Provide() private title: string = '';
+  @Provide() private title: string = '标题';
   @Provide() private author: string = '';
   @Provide() private content: string = '';
   @Provide() private markedContent: string = '';
   @Provide() private utime: string = '';
   @Provide() private ctime: string = '';
-  @Provide() private tags: string[] = [];
+  @Provide() private tags: string[] = ['tag'];
   @Provide() private tagstr: string = '';
   @Provide() private cmOption: any = {
     tabSize: 4,
@@ -173,33 +173,28 @@ export default class Article extends Vue {
 
   @Watch('tagstr')
   public onTagstrChange(val: string) {
-    if (val) {
-      this.tags = val.split(',').map((x) => x.trim());
-    }
+    this.tags = val.split(',').map((x) => x.trim());
   }
 
   @Watch('content')
   public onContentChange(val: string) {
-    if (val) {
-      this.markedContent = marked(val);
-    }
+    this.markedContent = marked(val);
   }
 
   public save() {
     this.loading = true;
-    api.tech.putArticle(
+    api.tech.postArticle(
       {
         token: this.$cookies.get('token'),
         tags: this.tags,
         title: this.title,
         content: this.content,
-        id: this.$route.params.id,
       },
       (res: any) => {
-        if (res.status === 202) {
-          // console.log('success');
-        }
         this.loading = false;
+        if (res.status === 201) {
+          this.$router.push('/edit/' + res.data.id);
+        }
       },
       (err: any) => {
         this.loading = false;
@@ -218,32 +213,6 @@ export default class Article extends Vue {
         }
       },
     });
-
-    api.tech.getArticle(
-      this.$route.params.id,
-      (res: any) => {
-        if (res.status === 204) {
-          this.content = '204 NO CONTENT 没有该页面';
-        }
-        if (res.status === 200) {
-          this.title = res.data.title;
-          this.author = res.data.author;
-          this.utime = res.data.utime;
-          this.ctime = res.data.ctime;
-          if (res.data.content) {
-            this.content = res.data.content;
-            this.markedContent = marked(this.content);
-          }
-          if (res.data.tags) {
-            this.tags = res.data.tags;
-            this.tagstr = this.tags.join(', ');
-          }
-        }
-      },
-      (err: any) => {
-        // console.log(err);
-      },
-    );
   }
 }
 </script>

@@ -1,6 +1,14 @@
 <template>
   <v-flex xs10 sm10 md10 lg10>
     <v-card :loading="loading" flat pa-0 ma-0 class="editcard">
+      <v-alert
+        v-model="alert"
+        outlined
+        dense
+        dismissible
+        icon="mdi-alert"
+        type="error"
+      >{{alertMessage}}</v-alert>
       <v-layout text-center row wrap pa-0 ma-0>
         <v-flex md12 text-center>
           <v-layout align-center justify-center text-center row wrap pa-0 ma-0>
@@ -170,6 +178,8 @@ export default class Article extends Vue {
   @Provide() private titleEdit: boolean = false;
   @Provide() private tagEdit: boolean = false;
   @Provide() private loading: boolean = false;
+  @Provide() private alert: boolean = false;
+  @Provide() private alertMessage: string = '';
 
   @Watch('tagstr')
   public onTagstrChange(val: string) {
@@ -203,7 +213,16 @@ export default class Article extends Vue {
       },
       (err: any) => {
         this.loading = false;
-        // console.log(err);
+        if (err.response.status === 400 || err.response.status === 403) {
+          this.alert = true;
+          this.alertMessage = err.response.data;
+        } else if (err.response.status === 500) {
+          this.alert = true;
+          this.alertMessage = '服务器内部错误';
+        } else {
+          this.alert = true;
+          this.alertMessage = err;
+        }
       },
     );
   }
@@ -241,7 +260,8 @@ export default class Article extends Vue {
         }
       },
       (err: any) => {
-        // console.log(err);
+        this.alert = true;
+        this.alertMessage = err;
       },
     );
   }

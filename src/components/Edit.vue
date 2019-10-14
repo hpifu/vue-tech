@@ -33,7 +33,7 @@
               <v-text-field v-model="tagstr" v-if="tagEdit" @blur="tagEdit = false" autofocus></v-text-field>
               <v-container v-else @click="tagEdit = true">
                 <template v-for="(tag, i) in tags">
-                  <v-chip outlined small color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
+                  <v-chip outlined color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
                 </template>
               </v-container>
             </v-flex>

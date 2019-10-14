@@ -7,7 +7,7 @@
 
           <h4 class="mt-5 author">
             <avatar disable />
-            {{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString()}}
+            {{author}}&nbsp;&nbsp;{{new Date(ctime).toLocaleString() || ''}}
           </h4>
           <template v-for="(tag, i) in tags">
             <v-chip outlined color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>

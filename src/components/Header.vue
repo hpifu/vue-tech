@@ -34,6 +34,7 @@
       <v-icon>mdi-login</v-icon>
     </v-btn>
     <avatar
+      v-else
       :href="this.$config.web.account + '/signin?from=' + this.$config.web.tech"
       :ifcond="this.$store.state.account.avatar"
       :src="this.$config.api.cloud + '/resource/' + this.$cookies.get('token') + '?name=' + this.$store.state.account.avatar"

@@ -16,10 +16,10 @@
     >
       <v-icon>mdi-open-in-new</v-icon>
     </v-btn>
-    <v-btn class="ma-2" outlined x-small fab color="indigo">
+    <v-btn class="ma-2" outlined x-small fab color="green">
       <v-icon>mdi-view-grid</v-icon>
     </v-btn>
-    <v-btn class="ma-2" outlined x-small fab color="indigo" to="/">
+    <v-btn class="ma-2" outlined x-small fab color="green" to="/">
       <v-icon>mdi-home</v-icon>
     </v-btn>
     <v-btn
@@ -29,15 +29,18 @@
       outlined
       x-small
       fab
-      color="indigo"
+      color="green"
     >
       <v-icon>mdi-login</v-icon>
     </v-btn>
     <v-btn
       v-else
       :href="this.$config.web.account + '/signin?from=' + this.$config.web.tech"
-      color="#fafafa"
-      depressed
+      color="green"
+      class="ma-2"
+      outlined
+      x-small
+      fab
     >
       <v-avatar size="30">
         <v-img
@@ -45,7 +48,7 @@
           v-on:error="loadSuccess = false"
           :src="this.$config.api.cloud + '/resource/' + this.$cookies.get('token') + '?name=' + this.$store.state.account.avatar"
         ></v-img>
-        <v-icon v-else large>mdi-account-circle</v-icon>
+        <v-icon v-else>mdi-account-circle</v-icon>
       </v-avatar>
     </v-btn>
   </v-app-bar>

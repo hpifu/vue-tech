@@ -10,14 +10,15 @@ export default new Router({
     {
       path: '/',
       component: () => import('./components/Articles.vue'),
-    },
-    {
+    }, {
       path: '/article/:id',
       component: () => import('./components/Article.vue'),
-    },
-    {
+    }, {
       path: '/edit/:id',
       component: () => import('./components/Edit.vue'),
+    }, {
+      path: '/newpost',
+      component: () => import('./components/NewPost.vue'),
     },
   ],
 });

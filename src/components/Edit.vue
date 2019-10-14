@@ -1,6 +1,5 @@
 <template>
   <v-flex xs10 sm10 md10 lg10>
-    <!-- mdi-content-save -->
     <v-layout text-center row wrap>
       <v-flex md12 text-center>
         <v-layout align-center justify-center text-center row wrap pa-0 ma-0>

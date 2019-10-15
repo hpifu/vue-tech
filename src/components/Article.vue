@@ -2,16 +2,15 @@
   <v-flex xs10 sm10 md8 lg6>
     <v-card :loading="loading" flat pa-0 ma-0 class="fafafa-card">
       <v-layout justify-center fill-height text-center row wrap>
-        <div class="markdown-body">
+        <v-flex md12 mt-5>
           <h2>{{title}}</h2>
+        </v-flex>
 
-          <h4 class="mt-5 author">
-            <avatar disable />
-            {{author}}&nbsp;&nbsp;{{ctime ? new Date().toLocaleString() : ''}}
-          </h4>
-          <template v-for="(tag, i) in tags">
-            <v-chip outlined color="green" class="mx-2 my-0" :key="i">#{{tag}}</v-chip>
-          </template>
+        <v-flex md12 mt-5>
+          <avatar disable />
+          <span
+            class="grey--text font-weight-bold"
+          >{{author}}&nbsp;&nbsp;{{ctime ? new Date().toLocaleString() : ''}}</span>
           <v-btn
             v-if="this.$store.state.account.isSignedIn && this.authorID === this.$store.state.account.id"
             class="ma-2"
@@ -23,7 +22,14 @@
           >
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
-          <div v-html="content" class="text-left mt-5"></div>
+        </v-flex>
+        <v-flex md12>
+          <template v-for="(tag, i) in tags">
+            <v-chip outlined color="green" class="mx-2 my-2" :key="i">#{{tag}}</v-chip>
+          </template>
+        </v-flex>
+        <div class="markdown-body">
+          <div v-html="content" class="text-left mt-3"></div>
         </div>
       </v-layout>
     </v-card>

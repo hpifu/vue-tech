@@ -18,6 +18,7 @@
               <h2 v-else @click="titleEdit = true">{{title}}</h2>
             </v-flex>
             <v-flex md3>
+              <upload-btn />
               <v-btn class="ma-2" outlined x-small fab color="indigo" @click="save">
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>
@@ -151,10 +152,12 @@ import hljs from '../assets/ts/hljs';
 import { codemirror } from 'vue-codemirror';
 import 'codemirror/mode/markdown/markdown.js';
 import 'codemirror/lib/codemirror.css';
+import UploadBtn from './UploadBtn.vue';
 
 @Component({
   components: {
     codemirror,
+    UploadBtn,
   },
 })
 export default class Article extends Vue {

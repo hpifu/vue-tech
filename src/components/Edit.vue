@@ -18,6 +18,7 @@
               <h2 v-else @click="titleEdit = true">{{title}}</h2>
             </v-flex>
             <v-flex md3>
+              <upload-btn />
               <v-btn class="ma-2" outlined x-small fab color="indigo" @click="save">
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>
@@ -149,15 +150,19 @@
 <script lang="ts">
 import api from '../api';
 import marked from 'marked';
+import axios from 'axios';
 import { Component, Prop, Vue, Provide, Watch } from 'vue-property-decorator';
 import hljs from '../assets/ts/hljs';
 import { codemirror } from 'vue-codemirror';
 import 'codemirror/mode/markdown/markdown.js';
 import 'codemirror/lib/codemirror.css';
+import UploadBtn from './UploadBtn.vue';
+import config from '../configs';
 
 @Component({
   components: {
     codemirror,
+    UploadBtn,
   },
 })
 export default class Article extends Vue {
@@ -209,7 +214,7 @@ export default class Article extends Vue {
       (err: any) => {
         this.loading = false;
         this.alert = true;
-        if (err.response.status == 400) {
+        if (err.response.status === 400) {
           this.alertMessage = err.response.data;
         } else {
           this.alertMessage = err;
@@ -251,7 +256,38 @@ export default class Article extends Vue {
   }
 
   public beforeMount() {
+    const renderer = new marked.Renderer();
+    const techimg =
+      config.api.cloud + '/techimg/' + this.$store.state.account.id + '?name=';
+    renderer.image = (href: any, title: any, text: any) => {
+      const linkstyle = href.split('=');
+      const link = linkstyle[0];
+      if (linkstyle.length === 1) {
+        return '<img src="' + techimg + link + '" alt="' + text + '">';
+      } else {
+        const style = linkstyle[1];
+        const wh = style.split('x');
+        const width = wh[0];
+        let height = width;
+        if (wh.length > 1) {
+          height = wh[1];
+        }
+        return (
+          '<img src="' +
+          techimg +
+          link +
+          '" alt="' +
+          text +
+          '" width="' +
+          width +
+          'px" height="' +
+          height +
+          'px">'
+        );
+      }
+    };
     marked.setOptions({
+      renderer,
       highlight(code: any, lang: any) {
         try {
           return hljs.highlight(lang, code).value;

@@ -111,7 +111,7 @@ export default class Article extends Vue {
 
   @Watch('content')
   public onContentChange(val: string) {
-    this.markedContent = marked(val, { renderer: hrenderer(this.authorID) });
+    this.markedContent = marked(val, { renderer: hrenderer(this.$store.state.account.id) });
   }
 
   public save() {

@@ -18,7 +18,7 @@
               <h2 v-else @click="titleEdit = true">{{title}}</h2>
             </v-flex>
             <v-flex md3>
-              <upload-btn />
+              <UploadBtn />
               <v-btn class="ma-2" outlined x-small fab color="indigo" @click="save">
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>

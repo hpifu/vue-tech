@@ -1,14 +1,14 @@
 <template>
-  <v-flex xs10 sm10 md8 lg6>
-    <v-layout align-center justify-center fill-height text-center row wrap>
+  <v-flex xs11 sm10 md8 lg6>
+    <v-layout align-center justify-center fill-height text-center row wrap ma-0 pa-0>
       <div
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="busy"
         infinite-scroll-distance="10"
       >
-        <v-layout align-center justify-center fill-height text-center row wrap>
+        <v-layout align-center justify-center fill-height text-center row wrap ma-0 pa-0>
           <template v-for="(article, i) in articles">
-            <v-flex xs12 sm6 md6 :key="i" px-3 py-3 class="article-cards">
+            <v-flex xs12 sm12 md6 :key="i" px-3 py-3 class="article-cards">
               <v-card class="mx-auto pa-2" height="200" :to="'/article/'+article.id">
                 <v-card height="40" flat>
                   <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>

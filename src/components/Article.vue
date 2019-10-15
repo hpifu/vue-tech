@@ -1,7 +1,7 @@
 <template>
-  <v-flex xs10 sm10 md8 lg6>
+  <v-flex xs11 sm10 md8 lg6>
     <v-card :loading="loading" flat pa-0 ma-0 class="fafafa-card">
-      <v-layout justify-center fill-height text-center row wrap>
+      <v-layout justify-center fill-height text-center row wrap ma-0 pa-0>
         <v-flex md12 mt-5>
           <h2>{{title}}</h2>
         </v-flex>

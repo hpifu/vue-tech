@@ -13,10 +13,7 @@
 
 <style>
 #app {
-  font-family: sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  font-family: "Roboto Condensed", sans-serif;
 }
 </style>
 

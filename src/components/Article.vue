@@ -23,7 +23,7 @@
           >
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
-          <div v-html="content" class="text-left"></div>
+          <div v-html="content" class="text-left mt-5"></div>
         </div>
       </v-layout>
     </v-card>
@@ -44,6 +44,7 @@ import marked from 'marked';
 import hljs from '../assets/ts/hljs';
 import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
 import Avatar from './Avatar.vue';
+import hrenderer from '../assets/ts/hrenderer';
 
 @Component({
   components: {
@@ -86,7 +87,9 @@ export default class Article extends Vue {
           this.utime = res.data.utime;
           this.ctime = res.data.ctime;
           this.tags = res.data.tags;
-          this.content = marked(res.data.content);
+          this.content = marked(res.data.content, {
+            renderer: hrenderer(this.authorID),
+          });
         }
       },
       (err: any) => {

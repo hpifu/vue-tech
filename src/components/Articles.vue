@@ -54,7 +54,7 @@
 
 <style>
 .article-cards {
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
   font-size: 14px;
   color: #333333;
 }

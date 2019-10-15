@@ -18,6 +18,16 @@
               <h2 v-else @click="titleEdit = true">{{title}}</h2>
             </v-flex>
             <v-flex md3>
+              <v-btn
+                class="ma-2"
+                outlined
+                x-small
+                fab
+                color="indigo"
+                :to="'/article/' + this.$route.params.id"
+              >
+                <v-icon>mdi-eye</v-icon>
+              </v-btn>
               <UploadBtn />
               <v-btn class="ma-2" outlined x-small fab color="indigo" @click="save">
                 <v-icon>mdi-content-save</v-icon>
@@ -45,12 +55,14 @@
         </v-flex>
 
         <v-flex md6 class="markdown-body pl-3">
+          <!-- <v-card class="pa-3 ma-0 fafafa-card" outlined> -->
           <div
+            class="text-left pa-0 ma-0"
             v-html="markedContent"
-            class="text-left"
             background-color="grey lighten-2"
             color="cyan"
           ></div>
+          <!-- </v-card> -->
         </v-flex>
       </v-layout>
     </v-card>
@@ -77,6 +89,7 @@ import 'codemirror/mode/markdown/markdown.js';
 import 'codemirror/lib/codemirror.css';
 import UploadBtn from './UploadBtn.vue';
 import config from '../configs';
+import hrenderer from '../assets/ts/hrenderer';
 
 @Component({
   components: {
@@ -85,6 +98,7 @@ import config from '../configs';
   },
 })
 export default class Article extends Vue {
+  @Provide() private authorID: number = 0;
   @Provide() private title: string = '';
   @Provide() private author: string = '';
   @Provide() private content: string = '';
@@ -118,7 +132,7 @@ export default class Article extends Vue {
   @Watch('content')
   public onContentChange(val: string) {
     if (val) {
-      this.markedContent = marked(val);
+      this.markedContent = marked(val, { renderer: hrenderer(this.authorID) });
     }
   }
 
@@ -175,38 +189,7 @@ export default class Article extends Vue {
   }
 
   public beforeMount() {
-    const renderer = new marked.Renderer();
-    const techimg =
-      config.api.cloud + '/techimg/' + this.$store.state.account.id + '?name=';
-    renderer.image = (href: any, title: any, text: any) => {
-      const linkstyle = href.split('=');
-      const link = linkstyle[0];
-      if (linkstyle.length === 1) {
-        return '<img src="' + techimg + link + '" alt="' + text + '">';
-      } else {
-        const style = linkstyle[1];
-        const wh = style.split('x');
-        const width = wh[0];
-        let height = width;
-        if (wh.length > 1) {
-          height = wh[1];
-        }
-        return (
-          '<img src="' +
-          techimg +
-          link +
-          '" alt="' +
-          text +
-          '" width="' +
-          width +
-          'px" height="' +
-          height +
-          'px">'
-        );
-      }
-    };
     marked.setOptions({
-      renderer,
       highlight(code: any, lang: any) {
         try {
           return hljs.highlight(lang, code).value;
@@ -223,13 +206,16 @@ export default class Article extends Vue {
           this.content = '204 NO CONTENT 没有该页面';
         }
         if (res.status === 200) {
+          this.authorID = res.data.authorID;
           this.title = res.data.title;
           this.author = res.data.author;
           this.utime = res.data.utime;
           this.ctime = res.data.ctime;
           if (res.data.content) {
             this.content = res.data.content;
-            this.markedContent = marked(this.content);
+            this.markedContent = marked(this.content, {
+              renderer: hrenderer(this.authorID),
+            });
           }
           if (res.data.tags) {
             this.tags = res.data.tags;

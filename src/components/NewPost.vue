@@ -72,6 +72,7 @@ import { codemirror } from 'vue-codemirror';
 import 'codemirror/mode/markdown/markdown.js';
 import 'codemirror/lib/codemirror.css';
 import UploadBtn from './UploadBtn.vue';
+import hrenderer from '../assets/ts/hrenderer';
 
 @Component({
   components: {
@@ -110,7 +111,7 @@ export default class Article extends Vue {
 
   @Watch('content')
   public onContentChange(val: string) {
-    this.markedContent = marked(val);
+    this.markedContent = marked(val, { renderer: hrenderer(this.authorID) });
   }
 
   public save() {

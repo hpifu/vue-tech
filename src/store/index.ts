@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import article from './article';
+import article from './articles';
 import account from './account';
 
 Vue.use(Vuex);

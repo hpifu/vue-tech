@@ -3,11 +3,11 @@
     <v-layout align-center justify-center fill-height text-center row wrap ma-0 pa-0>
       <div
         v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="busy"
+        infinite-scroll-disabled="$store.state.article.busy"
         infinite-scroll-distance="10"
       >
         <v-layout align-center justify-center fill-height text-center row wrap ma-0 pa-0>
-          <template v-for="(article, i) in articles">
+          <template v-for="(article, i) in $store.state.article.articles">
             <v-flex xs12 sm12 md6 :key="i" px-3 py-3 class="article-cards">
               <v-card class="mx-auto pa-2" height="200" :to="'/article/'+article.id">
                 <v-card height="40" flat>
@@ -98,30 +98,17 @@
 </style>
 
 <script lang="ts">
-import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
-import Avatar from './Avatar.vue';
+import { Component, Prop, Vue, Provide } from "vue-property-decorator";
+import Avatar from "./Avatar.vue";
 
 @Component({
   components: {
-    Avatar,
-  },
+    Avatar
+  }
 })
 export default class Articles extends Vue {
-  @Provide() private busy: boolean = false;
-
   public loadMore() {
-    this.busy = true;
-    if (this.$store.state.article.done) {
-      this.busy = false;
-      return;
-    }
-    this.$store.dispatch('article/loadMore', () => {
-      this.busy = false;
-    });
-  }
-
-  get articles() {
-    return this.$store.state.article.articles;
+    this.$store.dispatch("article/loadMore");
   }
 }
 </script>

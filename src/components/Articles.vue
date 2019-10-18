@@ -41,7 +41,14 @@
                 <v-card height="40" flat>
                   <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
                     <v-flex>
-                      <p class="ma-0 pa-0">{{article.author}}</p>
+                      <p class="ma-0 pa-0">
+                        <avatar
+                          disabled
+                          :ifcond="article.avatar"
+                          :src="$config.api.cloud + '/avatar/' + article.authorID + '?name=' + article.avatar"
+                        />
+                        {{article.author}}
+                      </p>
                     </v-flex>
                     <v-flex>
                       <p class="ma-0 pa-0">{{new Date(article.ctime).toLocaleString()}}</p>
@@ -92,8 +99,13 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
+import Avatar from './Avatar.vue';
 
-@Component({})
+@Component({
+  components: {
+    Avatar,
+  },
+})
 export default class Articles extends Vue {
   @Provide() private busy: boolean = false;
 

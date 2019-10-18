@@ -7,7 +7,11 @@
         </v-flex>
 
         <v-flex md12 mt-5>
-          <avatar disable />
+          <avatar
+            disabled
+            :ifcond="avatar"
+            :src="$config.api.cloud + '/avatar/' + authorID + '?name=' + avatar"
+          />
           <span
             class="grey--text font-weight-bold"
           >{{author}}&nbsp;&nbsp;{{ctime ? new Date().toLocaleString() : ''}}</span>
@@ -65,6 +69,7 @@ export default class Article extends Vue {
   @Provide() private utime: string = '';
   @Provide() private ctime: string = '';
   @Provide() private tags: string = '';
+  @Provide() private avatar: string = '';
   @Provide() private loading: boolean = false;
 
   public beforeMount() {
@@ -93,6 +98,7 @@ export default class Article extends Vue {
           this.utime = res.data.utime;
           this.ctime = res.data.ctime;
           this.tags = res.data.tags;
+          this.avatar = res.data.avatar;
           this.content = marked(res.data.content, {
             renderer: hrenderer(this.authorID),
           });

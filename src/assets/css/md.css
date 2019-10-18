@@ -94,13 +94,5 @@
 /* link */
 
 .markdown-body a {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  line-clamp: 1;
-  -webkit-box-orient: vertical;
-  box-orient: vertical;
-  display: -webkit-box;
-  display: box;
   word-break: break-all;
 }

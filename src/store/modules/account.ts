@@ -1,4 +1,4 @@
-import api from '../api';
+import api from '@/api';
 
 const states: any = {
     id: 0,

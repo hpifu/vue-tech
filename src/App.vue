@@ -34,6 +34,7 @@ export default class App extends Vue {
     if (this.$cookies.get('token')) {
       try {
         this.$store.dispatch('account/getAccount', this.$cookies.get('token'));
+        this.$store.dispatch('tagcloud/getTagCloud');
       } catch (error) {
         // console.log(error);
       }

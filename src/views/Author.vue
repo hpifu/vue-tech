@@ -119,8 +119,6 @@ export default class Articles extends Vue {
   }
 
   public toauthor(authorID: number) {
-    console.log(this.$route.params.author === authorID.toString());
-    console.log(this.$route.params.author, authorID.toString());
     if (
       this.$route.name === 'author' &&
       this.$route.params.author === authorID.toString()

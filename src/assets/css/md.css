@@ -51,6 +51,11 @@
   letter-spacing: 0em;
 }
 
+.markdown-body code {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
 .markdown-body pre {
   display: block;
   padding: 9.5px;

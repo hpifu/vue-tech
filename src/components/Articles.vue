@@ -87,28 +87,20 @@
 .article-cards h2 {
   font-size: 16px;
 }
-
-.article-cards h3 {
-  font-size: 14px;
-}
-
-.cards-subtitle {
-  color: #aaaaaa;
-}
 </style>
 
 <script lang="ts">
-import { Component, Prop, Vue, Provide } from "vue-property-decorator";
-import Avatar from "./Avatar.vue";
+import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
+import Avatar from './Avatar.vue';
 
 @Component({
   components: {
-    Avatar
-  }
+    Avatar,
+  },
 })
 export default class Articles extends Vue {
   public loadMore() {
-    this.$store.dispatch("articles/loadMore");
+    this.$store.dispatch('articles/loadMore');
   }
 }
 </script>

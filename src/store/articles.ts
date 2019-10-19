@@ -1,57 +1,71 @@
 import axios from 'axios';
+import config from '@/configs';
 
-import config from '../configs';
+const states: any = {
+    offset: 0,
+    limit: 2,
+    articles: [],
+    done: false,
+    busy: false,
+}
 
-import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
+const mutations: any = {
+    setBusy(state: any, value: boolean) {
+        state.busy = value
+    },
+    addOffset(state: any, value: number) {
+        state.offset += value;
+    },
+    allDone(state: any) {
+        state.done = true;
+    },
+    appendArticles(state: any, as: any[]) {
+        state.articles.push(...as);
+    },
+    reset(state: any) {
+        state.offset = 0;
+        state.done = false;
+        state.articles = [];
+    },
+};
 
-@Module({ namespaced: true })
-export default class Articles extends VuexModule {
-    public busy = false;
-    public offset = 0;
-    public limit = 18;
-    public articles: any[] = [];
-    public done = false;
-
-    @Mutation
-    public reset() {
-        this.offset = 0;
-        this.done = false;
-        this.articles = [];
-    }
-
-    @Mutation
-    public setBusy(busy: boolean) {
-        this.busy = busy
-    }
-
-    @Mutation
-    public updateArticles(articles: any[]) {
-        console.log("updateArticlues")
-        this.articles.push(...articles);
-        this.offset += articles.length;
-        if (articles.length !== this.limit) {
-            this.done = true;
-        }
-        this.busy = false;
-    }
-
-    @Action({ commit: 'updateArticles' })
-    public async loadMore() {
-        if (this.done) {
+const actions = {
+    async loadMore({ commit, state }: { commit: any, state: any }) {
+        if (state.done) {
             return;
         }
-        this.context.commit("setBusy", true)
+        commit('setBusy', true);
+        const offset = state.offset
+        const limit = state.limit
+        console.log(offset, limit)
 
-        const offset = this.offset;
-        const limit = this.limit;
-        const res = await axios.get(config.api.tech + '/article', {
-            params: {
-                offset,
-                limit,
-            },
-            withCredentials: true,
-        });
+        try {
+            const res = await axios.get(config.api.tech + '/article', {
+                params: {
+                    offset,
+                    limit,
+                },
+                withCredentials: true,
+            });
 
-        return res.data;
-    }
-}
+            commit('appendArticles', res.data);
+            commit('addOffset', res.data.length);
+            if (res.data.length !== state.limit) {
+                commit('allDone');
+                console.log("done", state.done)
+            }
+        } catch (err) {
+            console.log(err)
+        } finally {
+            commit('setBusy', false);
+            console.log(state.busy)
+        }
+    },
+};
+
+export default {
+    namespaced: true,
+    state: states,
+    actions,
+    mutations,
+};

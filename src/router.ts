@@ -9,10 +9,10 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('./components/Articles.vue'),
+      component: () => import('./views/Articles.vue'),
     }, {
       path: '/article/:id',
-      component: () => import('./components/Article.vue'),
+      component: () => import('./views/Article.vue'),
     }, {
       path: '/edit/:id',
       component: () => import('./components/Edit.vue'),

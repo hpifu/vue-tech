@@ -19,6 +19,14 @@ export default new Router({
     }, {
       path: '/newpost',
       component: () => import('./components/NewPost.vue'),
-    },
+    }, {
+      path: '/author/:author',
+      name: 'author',
+      component: () => import('./views/Author.vue'),
+    }, {
+      path: '/tag/:tag',
+      name: 'tag',
+      component: () => import('./views/Tag.vue'),
+    }
   ],
 });

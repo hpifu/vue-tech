@@ -7,11 +7,16 @@
         </v-flex>
 
         <v-flex md12 mt-5>
-          <avatar
-            disabled
-            :ifcond="avatar"
-            :src="$config.api.cloud + '/avatar/' + authorID + '?name=' + avatar"
-          />
+          <v-btn @click="toauthor(authorID)" color="green" class="ma-2" outlined x-small fab>
+            <v-avatar size="30">
+              <v-img
+                v-if="avatar && loadSuccess"
+                v-on:error="loadSuccess = false"
+                :src="$config.api.cloud + '/avatar/' + authorID + '?name=' + avatar"
+              ></v-img>
+              <v-icon v-else>mdi-account-circle</v-icon>
+            </v-avatar>
+          </v-btn>
           <span
             class="grey--text font-weight-bold"
           >{{author}}&nbsp;&nbsp;{{ctime ? new Date().toLocaleString() : ''}}</span>
@@ -29,7 +34,7 @@
         </v-flex>
         <v-flex md12>
           <template v-for="(tag, i) in tags">
-            <v-chip outlined color="green" class="mx-2 my-2" :key="i">#{{tag}}</v-chip>
+            <v-chip outlined color="green" class="mx-2 my-2" :key="i" @click="totag(tag)">#{{tag}}</v-chip>
           </template>
         </v-flex>
         <div class="markdown-body">
@@ -62,6 +67,7 @@ import hrenderer from '@/assets/ts/hrenderer';
   },
 })
 export default class Article extends Vue {
+  @Provide() private loadSuccess: boolean = true;
   @Provide() private title: string = '';
   @Provide() private author: string = '';
   @Provide() private authorID: number = 0;
@@ -71,6 +77,16 @@ export default class Article extends Vue {
   @Provide() private tags: string = '';
   @Provide() private avatar: string = '';
   @Provide() private loading: boolean = false;
+
+  public totag(tag: string) {
+    this.$store.commit('tag/reset');
+    this.$router.push('/tag/' + tag);
+  }
+
+  public toauthor(authorID: number) {
+    this.$store.commit('author/reset');
+    this.$router.push('/author/' + authorID);
+  }
 
   public beforeMount() {
     marked.setOptions({

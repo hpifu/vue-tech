@@ -30,7 +30,7 @@ const mutations: any = {
 };
 
 const actions = {
-    async loadMore({ commit, state }: { commit: any, state: any }) {
+    async loadMore({ commit, state }: { commit: any, state: any }, author: number) {
         if (state.done) {
             return;
         }
@@ -40,7 +40,7 @@ const actions = {
         console.log(offset, limit)
 
         try {
-            const res = await axios.get(config.api.tech + '/article', {
+            const res = await axios.get(config.api.tech + '/articles/author/' + author, {
                 params: {
                     offset,
                     limit,

@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import article from './articles';
+import articles from './articles';
 import account from './account';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    article,
+    articles,
     account,
   },
   strict: process.env.NODE_ENV !== 'production',

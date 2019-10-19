@@ -3,11 +3,11 @@
     <v-layout align-center justify-center fill-height text-center row wrap ma-0 pa-0>
       <div
         v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="$store.state.article.busy"
+        infinite-scroll-disabled="$store.state.articles.busy"
         infinite-scroll-distance="10"
       >
         <v-layout align-center justify-center fill-height text-center row wrap ma-0 pa-0>
-          <template v-for="(article, i) in $store.state.article.articles">
+          <template v-for="(article, i) in $store.state.articles.articles">
             <v-flex xs12 sm12 md6 :key="i" px-3 py-3 class="article-cards">
               <v-card class="mx-auto pa-2" height="200" :to="'/article/'+article.id">
                 <v-card height="40" flat>
@@ -108,7 +108,7 @@ import Avatar from "./Avatar.vue";
 })
 export default class Articles extends Vue {
   public loadMore() {
-    this.$store.dispatch("article/loadMore");
+    this.$store.dispatch("articles/loadMore");
   }
 }
 </script>

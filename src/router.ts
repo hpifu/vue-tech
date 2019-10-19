@@ -27,6 +27,6 @@ export default new Router({
       path: '/tag/:tag',
       name: 'tag',
       component: () => import('./views/Tag.vue'),
-    }
+    },
   ],
 });

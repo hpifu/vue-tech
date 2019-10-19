@@ -3,15 +3,15 @@ import config from '@/configs';
 
 const states: any = {
     offset: 0,
-    limit: 2,
+    limit: 18,
     articles: [],
     done: false,
     busy: false,
-}
+};
 
 const mutations: any = {
     setBusy(state: any, value: boolean) {
-        state.busy = value
+        state.busy = value;
     },
     addOffset(state: any, value: number) {
         state.offset += value;
@@ -35,9 +35,8 @@ const actions = {
             return;
         }
         commit('setBusy', true);
-        const offset = state.offset
-        const limit = state.limit
-        console.log(offset, limit)
+        const offset = state.offset;
+        const limit = state.limit;
 
         try {
             const res = await axios.get(config.api.tech + '/articles/author/' + author, {
@@ -48,26 +47,24 @@ const actions = {
                 withCredentials: true,
             });
 
-            if (res.status == 204) {
+            if (res.status === 204) {
                 commit('allDone');
             }
-            if (res.status == 200 && !res.data) {
+            if (res.status === 200 && !res.data) {
                 commit('allDone');
             }
-            if (res.status == 200 && res.data) {
+            if (res.status === 200 && res.data) {
                 commit('appendArticles', res.data);
                 commit('addOffset', res.data.length);
                 if (res.data.length !== state.limit) {
                     commit('allDone');
-                    console.log("done", state.done)
                 }
             }
             commit('setBusy', false);
         } catch (err) {
             setTimeout(() => {
                 commit('setBusy', false);
-            }, 5000)
-            console.log(err)
+            }, 5000);
         }
     },
 };

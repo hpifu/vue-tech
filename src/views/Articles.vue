@@ -1,6 +1,6 @@
 <template>
   <v-flex xs11 sm10 md8 lg6>
-    <v-layout align-center justify-center fill-height text-center row wrap ma-0 pa-0>
+    <v-layout align-center text-center row wrap ma-0 pa-0>
       <div
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="$store.state.articles.busy"

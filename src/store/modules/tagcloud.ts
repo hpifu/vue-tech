@@ -3,13 +3,13 @@ import config from '@/configs';
 
 const states: any = {
     tagcloud: [],
-}
+};
 
 const mutations: any = {
     setTagCloud(state: any, as: any[]) {
         state.tagcloud = as;
     },
-}
+};
 
 const actions = {
     async getTagCloud({ commit, state }: { commit: any, state: any }) {
@@ -21,9 +21,10 @@ const actions = {
                 commit('setTagCloud', res.data);
             }
         } catch (err) {
+            // nothing to do
         }
-    }
-}
+    },
+};
 
 export default {
     namespaced: true,

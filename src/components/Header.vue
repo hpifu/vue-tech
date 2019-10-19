@@ -16,6 +16,9 @@
     >
       <v-icon>mdi-open-in-new</v-icon>
     </v-btn>
+    <v-btn class="ma-2" outlined x-small fab color="green" to="/tagcloud">
+      <v-icon>mdi-tag</v-icon>
+    </v-btn>
     <v-btn class="ma-2" outlined x-small fab color="green">
       <v-icon>mdi-view-grid</v-icon>
     </v-btn>

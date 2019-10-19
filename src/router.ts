@@ -20,6 +20,9 @@ export default new Router({
       path: '/newpost',
       component: () => import('./components/NewPost.vue'),
     }, {
+      path: '/tagcloud',
+      component: () => import('./views/TagCloud.vue'),
+    }, {
       path: '/author/:author',
       name: 'author',
       component: () => import('./views/Author.vue'),

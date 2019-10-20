@@ -16,7 +16,7 @@ import wordcloud from 'vue-wordcloud';
   },
 })
 export default class App extends Vue {
-  public beforeMounted() {
+  public created() {
     this.$store.dispatch('tagcloud/getTagCloud');
   }
 

@@ -9,6 +9,7 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'articles',
       component: () => import('./views/Articles.vue'),
     }, {
       path: '/article/:id',
@@ -30,6 +31,10 @@ export default new Router({
       path: '/tag/:tag',
       name: 'tag',
       component: () => import('./views/Tag.vue'),
+    }, {
+      path: '/search',
+      name: 'search',
+      component: () => import('./views/Search.vue'),
     },
   ],
 });

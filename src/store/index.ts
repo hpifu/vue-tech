@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import articles from './modules/articles';
+
 import account from './modules/account';
+import articles from './modules/articles';
 import author from './modules/author';
+import search from './modules/search';
 import tag from './modules/tag';
 import tagcloud from './modules/tagcloud';
 
@@ -15,6 +17,7 @@ export default new Vuex.Store({
     tag,
     account,
     tagcloud,
+    search,
   },
   strict: process.env.NODE_ENV !== 'production',
 });

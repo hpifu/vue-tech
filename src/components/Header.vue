@@ -3,7 +3,16 @@
     <Logo value="HPiFu" />&nbsp;&nbsp;
     <SubLogo value="tech" />
     <v-spacer></v-spacer>
-    <v-spacer></v-spacer>
+    <v-text-field
+      v-model="query"
+      append-outer-icon="mdi-magnify"
+      single-line
+      class="mt-9"
+      filled
+      full-width
+      @click:append-outer="search"
+      @keydown.enter="search"
+    ></v-text-field>
     <v-spacer></v-spacer>
     <v-btn
       v-if="this.$store.state.account.isSignedIn"
@@ -60,5 +69,21 @@ import Avatar from './Avatar.vue';
 })
 export default class Header extends Vue {
   @Provide() private loadSuccess: boolean = true;
+
+  public search() {
+    this.$store.commit('search/reset', 0);
+    this.$store.dispatch('search/loadMore', () => {});
+    if (this.$route.name != 'search') {
+      this.$router.push('/search');
+    }
+  }
+
+  get query() {
+    return this.$store.state.search.query;
+  }
+
+  set query(query: string) {
+    this.$store.commit('search/setQuery', query);
+  }
 }
 </script>

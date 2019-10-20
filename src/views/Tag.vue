@@ -9,7 +9,7 @@
         <v-layout align-center justify-center fill-height text-center row wrap ma-0 pa-0>
           <template v-for="(article, i) in $store.state.tag.articles">
             <v-flex xs12 sm12 md6 :key="i" px-3 py-3 class="article-cards">
-              <v-card class="mx-auto pa-2" height="200">
+              <v-card class="mx-auto pa-2" height="200" min-width="300">
                 <v-card height="40" flat :to="'/article/'+article.id">
                   <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
                     <v-flex>

@@ -36,7 +36,7 @@
                 </v-card>
                 <v-card height="60" flat :to="'/article/'+article.id">
                   <v-layout align-center justify-center fill-height text-center row wrap pa-3 ma-0>
-                    <div class="article-desc">{{article.content}}</div>
+                    <div class="article-desc">{{article.brief}}</div>
                   </v-layout>
                 </v-card>
                 <v-card height="40" flat>

@@ -1,5 +1,5 @@
-import axios from 'axios';
 import config from '@/configs';
+import axios from 'axios';
 
 const states: any = {
     offset: 0,
@@ -64,7 +64,7 @@ const actions = {
         } catch (err) {
             setTimeout(() => {
                 commit('setBusy', false);
-            }, 5000);
+            }, 1000);
         }
     },
 };

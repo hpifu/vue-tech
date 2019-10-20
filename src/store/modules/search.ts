@@ -50,7 +50,6 @@ const actions = {
                 withCredentials: true,
             });
 
-            console.log(res.data);
             if (res.status === 204) {
                 commit('allDone');
             }

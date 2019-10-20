@@ -5,12 +5,14 @@
     <v-spacer></v-spacer>
     <v-text-field
       v-model="query"
-      append-outer-icon="mdi-magnify"
+      append-icon="mdi-magnify"
       single-line
-      class="mt-9"
       filled
+      rounded
+      dense
       full-width
-      @click:append-outer="search"
+      hide-details
+      @click:append="search"
       @keydown.enter="search"
     ></v-text-field>
     <v-spacer></v-spacer>

@@ -19,7 +19,7 @@
           </v-btn>
           <span
             class="grey--text"
-          >{{author}}&nbsp;&nbsp;{{ctime ? new Date().toLocaleString() : ''}}</span>
+          >{{author}}&nbsp;&nbsp;{{ctime ? new Date(ctime).toLocaleString() : ''}}</span>
           <v-btn
             v-if="this.$store.state.account.isSignedIn && this.authorID === this.$store.state.account.id"
             class="ma-2"

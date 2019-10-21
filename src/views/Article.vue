@@ -18,7 +18,7 @@
             </v-avatar>
           </v-btn>
           <span
-            class="grey--text font-weight-bold"
+            class="grey--text"
           >{{author}}&nbsp;&nbsp;{{ctime ? new Date().toLocaleString() : ''}}</span>
           <v-btn
             v-if="this.$store.state.account.isSignedIn && this.authorID === this.$store.state.account.id"

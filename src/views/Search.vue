@@ -41,9 +41,9 @@
                 </v-card>
                 <v-card height="40" flat>
                   <v-layout align-center justify-center fill-height text-center row wrap pa-0 ma-0>
-                    <v-flex>
+                    <v-flex xs5>
                       <p class="ma-0 pa-0" @click="toauthor(article.authorID)">
-                        <v-btn color="green" class="ma-2" outlined x-small fab>
+                        <v-btn color="green" class="mr-2 my-2" outlined x-small fab>
                           <v-avatar size="30">
                             <v-img
                               v-if="article.avatar && loadSuccess"
@@ -56,8 +56,16 @@
                         {{article.author}}
                       </p>
                     </v-flex>
-                    <v-flex>
-                      <p class="ma-0 pa-0">{{new Date(article.ctime).toLocaleString()}}</p>
+                    <v-flex xs2>
+                      <p class="ma-0 pa-0">{{new Date(article.ctime).toLocaleString().substr(0,6)}}</p>
+                    </v-flex>
+                    <v-flex xs2>
+                      <v-icon small color="grey">mdi-eye</v-icon>
+                      {{article.view}}
+                    </v-flex>
+                    <v-flex xs2>
+                      <v-icon small color="grey">mdi-heart</v-icon>
+                      {{article.like}}
                     </v-flex>
                   </v-layout>
                 </v-card>

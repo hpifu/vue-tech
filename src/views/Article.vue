@@ -31,6 +31,18 @@
           >
             <v-icon>mdi-pencil</v-icon>
           </v-btn>
+          <v-btn
+            v-else
+            ref="hello"
+            class="ma-2"
+            text
+            icon
+            :color="heartColor"
+            :class="{'heartBeat': heartClicked}"
+            @click="like"
+          >
+            <v-icon>mdi-heart</v-icon>
+          </v-btn>
         </v-flex>
         <v-flex md12>
           <template v-for="(tag, i) in tags">
@@ -60,6 +72,8 @@ import hljs from '@/assets/ts/hljs';
 import { Component, Prop, Vue, Provide } from 'vue-property-decorator';
 import Avatar from '@/components/Avatar.vue';
 import hrenderer from '@/assets/ts/hrenderer';
+import axios from 'axios';
+import config from '@/configs';
 
 @Component({
   components: {
@@ -77,6 +91,8 @@ export default class Article extends Vue {
   @Provide() private tags: string = '';
   @Provide() private avatar: string = '';
   @Provide() private loading: boolean = false;
+  @Provide() private heartClicked: boolean = false;
+  @Provide() private heartColor: string = 'grey';
 
   public totag(tag: string) {
     this.$store.commit('tag/reset');
@@ -86,6 +102,22 @@ export default class Article extends Vue {
   public toauthor(authorID: number) {
     this.$store.commit('author/reset');
     this.$router.push('/author/' + authorID);
+  }
+
+  public like() {
+    if (this.heartClicked) {
+      return;
+    }
+    this.heartColor = 'pink';
+    this.heartClicked = true;
+
+    axios.post(
+      config.api.tech + '/like/' + this.$route.params.id,
+      {},
+      {
+        withCredentials: true,
+      },
+    );
   }
 
   public beforeMount() {

@@ -56,15 +56,12 @@
                         {{article.author}}
                       </p>
                     </v-flex>
-                    <v-flex xs2>
-                      <p class="ma-0 pa-0">{{new Date(article.ctime).toLocaleString().substr(0,6)}}</p>
-                    </v-flex>
-                    <v-flex xs2>
-                      <v-icon small color="grey">mdi-eye</v-icon>
+                    <v-flex xs3>
+                      <v-icon small color="grey" class="mx-2">mdi-eye</v-icon>
                       {{article.view}}
                     </v-flex>
-                    <v-flex xs2>
-                      <v-icon small color="grey">mdi-heart</v-icon>
+                    <v-flex xs3>
+                      <v-icon small color="grey" class="mx-2">mdi-heart</v-icon>
                       {{article.like}}
                     </v-flex>
                   </v-layout>

@@ -74,8 +74,8 @@ export default class Header extends Vue {
 
   public search() {
     this.$store.commit('search/reset', 0);
-    this.$store.dispatch('search/loadMore', () => {});
-    if (this.$route.name != 'search') {
+    this.$store.dispatch('search/loadMore');
+    if (this.$route.name !== 'search') {
       this.$router.push('/search');
     }
   }

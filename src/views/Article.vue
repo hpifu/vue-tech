@@ -2,11 +2,11 @@
   <v-flex xs11 sm10 md8 lg6>
     <v-card :loading="loading" flat pa-0 ma-0 class="fafafa-card">
       <v-layout justify-center fill-height text-center row wrap ma-0 pa-0>
-        <v-flex md12 mt-5>
+        <v-flex xs12 md12 mt-5>
           <h2>{{title}}</h2>
         </v-flex>
 
-        <v-flex md12 mt-5>
+        <v-flex xs12 md12 mt-5>
           <v-btn @click="toauthor(authorID)" color="green" class="ma-2" outlined x-small fab>
             <v-avatar size="30">
               <v-img
@@ -44,7 +44,7 @@
             <v-icon>mdi-heart</v-icon>
           </v-btn>
         </v-flex>
-        <v-flex md12>
+        <v-flex xs12 md12>
           <template v-for="(tag, i) in tags">
             <v-chip outlined color="green" class="mx-2 my-2" :key="i" @click="totag(tag)">#{{tag}}</v-chip>
           </template>

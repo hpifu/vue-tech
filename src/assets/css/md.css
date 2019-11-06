@@ -123,3 +123,23 @@
   margin-left: -1.3em;
   width: 1.3em;
 }
+
+/* table */
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.markdown-body table td, .markdown-body table th {
+  padding: 6px;
+  text-align: center;
+}
+
+.markdown-body table thead th {
+  background: #eee;
+}
+
+.markdown-body table tbody td, .markdown-body table thead th {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}

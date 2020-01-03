@@ -8,8 +8,8 @@ services:
       restart_policy:
         condition: on-failure
     networks:
-      - ${repository}net
-
+      - online
 networks:
-  ${repository}net:
-    name: ${repository}net
+  online:
+    external: true
+    name: online
